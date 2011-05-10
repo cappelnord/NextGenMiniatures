@@ -1,2 +1,62 @@
-This SuperCollider Classes will be used to perform and test
-small pieces for multiple laptop speakers and screens.
+Diese SuperCollider Klassen werden genutzt um kleine Stücke
+für mehrere Laptops (Bildschirme und Lautsprecher) zu entwickeln,
+testen und aufzuführen.
+
+Folgende Softwarekomponenten müssen entwickelt werden:
+
+- Kompositions Framework (wie können Laptops angesprochen werden)
+  --> z.B. EventTypes und ein Interface
+- Server, der entweder Nachrichten an die Clients oder an die
+  Testumgebung weiterreicht.
+- Die Testumgebung sollte dem Komponisten ermöglichen ein Stück
+  mit allen Aspekten möglichst realitätsnah zu simulieren.
+- Der Client muss im Moment v.a. die Farben darstellen können.
+  Eventuell muss noch weiterer, fancy stuff, geschehen?
+- Ein Sequencer, der die einzelnen Miniaturen ausspielt.
+
+Dabei ist jede Miniatur erstmal eine SC Funktion, die jedoch
+auf alle weiteren Techniken zurückgreifen kann (z.B. eine
+Routine erzeugen oder eine Klasse aufrufen).
+
+Ausnahme sollten hier SynthDefs sein. Diese sollten in Extra Dateien
+gesammelt werden und vor Beginn des Konzerts auf dem Client ausgeführt
+werden. Hiermit ersparen wir uns möglichen Ärger.
+
+Weitere Absprachen:
+
+- Farben als RGB Float zwischen 0 und 1
+  
+Probleme:
+
+- OSC ist über WLAN nicht zuverlässig. Wir sollten uns nicht
+  auf Gated Synths verlassen. Es ist besser, wenn ein Synth
+  nicht klingt, als wenn er zu lange (oder ewig) klingt.
+  
+  Es wäre wahrscheinlich das beste mit Envelopes mit fester
+  Länge zu arbeiten. 
+  
+  Allgemein: Jedes Ereignis muss seine Länge kennen und der
+  Client muss es selbstständig beenden.
+  
+- Ich glaube fast schon, dass der Client fancy Stuff
+  machen sollen könnte (eventuell auch einfach SC Code ausführen)
+  
+  Viele Klänge (z.B. granulare) würden sonst relativ viel Traffic
+  im WLAN erzeugen. Kurzzeitiges "Sendeloch" würde in einem globalen
+  kurzzeitigen Klangabbruch resultieren.
+  
+  Der Quelltext der verschickt wird sollte in eine Funktion kompilieren
+  die als einzigen Parameter das Clientobjekt enthält. Somit
+  ist auch in der Testumgebung klar was genau passiert.
+  
+Interface:
+
+Folgende Aktionen sollten vom Komponisten abrufbar sein. Alle Aktionen
+müssen natürlich von Client und Text Umgebung dementsprechend
+interpretiert werden können.
+
+- Spiele Synth xyz mit Parametern abc
+  --> Im Moment durch play + Synth Objekt
+- Setze Farbe auf RGB (color)
+- Fade auf Farbe RGB in t Sekunden (fadeColor)
+- Führe auf Client Quelltext blub aus (execute)

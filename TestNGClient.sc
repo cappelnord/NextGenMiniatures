@@ -1,0 +1,3 @@
+TestNGClient : OutputNGClient {
+	
+}
