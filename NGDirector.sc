@@ -40,6 +40,7 @@ NGDirector {
 	testWindow {
 		testWindow.isNil.if {
 			testWindow = Window.new("NG Test", Rect(100,100, testWindowWidth + 100, testWindowHeight + 100), false);
+			testWindow.view.background = Color(0,0,0,1);
 			// testWindow.front;
 		};
 		^testWindow;	
