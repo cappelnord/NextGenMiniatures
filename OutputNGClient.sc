@@ -12,6 +12,8 @@ OutputNGClient : AbstractNGClient {
 	var <>view;
 	var <>server;
 	
+	var oldColor = nil;
+	
 	// Konstruktor der abgeleiteten Klassen müssen view und server erzeugen
 	
 	execute {|... args|
@@ -52,6 +54,17 @@ OutputNGClient : AbstractNGClient {
 			};
 			view.background = Color(red, green, blue, 1.0);
 		}, AppClock).play();	
+	}
+	
+	blink {|red, green, blue, time|
+		oldColor.isNil.if {
+			oldColor = view.background;	
+		};
+		
+		{
+			view.background = Color(red, green, blue, 1.0);
+			{view.background = oldColor; oldColor = nil;}.defer(time);
+		}.defer;
 	}
 	
 	resetTask {

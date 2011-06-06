@@ -31,6 +31,10 @@ AbstractNGClient {
 		"fadeColor not implemented".warn;
 	}
 	
+	blink {|red, green, blue, time|
+		"blink not implemented".warn;	
+	}
+	
 	serverName {
 		^("ng_" ++ id.asString).asSymbol;	
 	}

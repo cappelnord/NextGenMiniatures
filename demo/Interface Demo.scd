@@ -63,6 +63,9 @@ g.at(g.clients.size.rand).color(1,0,0)
 // die fadeColor Methode macht einen Farbübergang von der aktuellen Farbe in x Sekunden
 g.at(4).fadeColor(0,1,1,10)
 
+// blink geht auch!
+g[4].blink(1,0,0,0.1)
+
 // schließlich gibt es noch die execute Methode. Sie schickt SC Quelltext per OSC
 // an den anderen Rechner, baut eine Funktion und übergibt den lokalen Client als
 // Argument.

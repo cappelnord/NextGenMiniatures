@@ -60,3 +60,4 @@ interpretiert werden können.
 - Setze Farbe auf RGB (color)
 - Fade auf Farbe RGB in t Sekunden (fadeColor)
 - Führe auf Client Quelltext blub mit Argumetnen klack aus (execute)
+- Zeigt für x Sekunden eine Farbe an, geht dann wieder zurück (blink)
