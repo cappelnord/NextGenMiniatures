@@ -19,7 +19,7 @@ NGResponder {
 		
 		responders.add(OSCresponder(nil, "/execute", {|time, resp, msg|
 			msg = msg[1..];
-			msg[0] = msg[0].interpret;
+			msg[0] = msg[0].asString.interpret;
 			client.execute(*msg);
 		}).add);
 		
@@ -28,7 +28,7 @@ NGResponder {
 		}).add);
 		
 		responders.add(OSCresponder(nil, "/fadeColor", {|time, resp, msg|
-			client.color(msg[1].asFloat, msg[2].asFloat, msg[3].asFloat, msg[4].asFloat);
+			client.fadeColor(msg[1].asFloat, msg[2].asFloat, msg[3].asFloat, msg[4].asFloat);
 		}).add);
 	}
 	

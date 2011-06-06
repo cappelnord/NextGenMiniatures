@@ -34,7 +34,7 @@ NGDirector {
 	}
 	
 	addNetClient {|id, position, host|
-		clients = clients.add(id, NetSendNGClient(id, position, host));
+		clients = clients.add(NetSendNGClient(id, position, host));
 	}
 	
 	testWindow {
