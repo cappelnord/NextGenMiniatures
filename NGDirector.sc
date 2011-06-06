@@ -11,7 +11,7 @@ NGDirector {
 	}
 	
 	init {
-		clients = IdentityDictionary.new;	
+		clients = List.new;	
 	}
 	
 	*instance {
@@ -30,11 +30,11 @@ NGDirector {
 	}
 	
 	addTestClient {|id, position|
-		clients.put(id, TestNGClient(id, position));
+		clients = clients.add(TestNGClient(id, position));
 	}
 	
 	addNetClient {|id, position, host|
-		clients.put(id, NetSendNGClient(id, position, host));
+		clients = clients.add(id, NetSendNGClient(id, position, host));
 	}
 	
 	testWindow {
