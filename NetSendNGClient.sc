@@ -34,6 +34,10 @@ NetSendNGClient : OutputNGClient {
 	}
 	
 	fadeColor {|red, green, blue, time|
-		net.sendMsg("/fadeColor", red.asFloat, green.asFloat, blue.asFloat, time.asFloat);	
+		net.sendMsg("/fadeColor", red.asFloat, green.asFloat, blue.asFloat, time.asFloat);
+	}
+	
+	blink {|red, green, blue, time|
+		net.sendMsg("/blink", red.asFloat, green.asFloat, blue.asFloat, time.asFloat);
 	}
 }
