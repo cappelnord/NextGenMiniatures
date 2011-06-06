@@ -4,26 +4,34 @@
 
 OutputNGClient : AbstractNGClient {
 	
-	var <>view;
 	var task;
 	
 	var fadeTickRate = 0.05;
 	
-	// Konstruktor der abgeleiteten Klassen müssen view erzeugen
+	// output objects
+	var <>view;
+	var <>server;
 	
-	// play muss von der abgeleiteten Klasse implementiert werden
-
+	// Konstruktor der abgeleiteten Klassen müssen view und server erzeugen
 	
-	/* execute {|source|
-		// implement	
-	} */
-	
-	color {|red, green, blue|
-		this.resetTask();
-		view.background = Color(red, green, blue, 1.0);
+	execute {|func|
+		func.value(this);	
 	}
 	
-	colorFade {|red, green, blue, time|
+	play {|defName, args, target, addAction|
+		target = target ? this.defaultTarget;
+		addAction = addAction ? this.defaultAddAction;
+		^Synth(defName, args, target, addAction);
+	}
+	
+	color {|red, green, blue|
+		{
+			this.resetTask;
+			view.background = Color(red, green, blue, 1.0);
+		}.defer;
+	}
+	
+	fadeColor {|red, green, blue, time|
 		var color = view.background;
 		var targetColor = [red, green, blue];
 		var startColor = [color.red, color.green, color.blue];
@@ -49,5 +57,13 @@ OutputNGClient : AbstractNGClient {
 			task.stop();
 			task = nil;
 		};
+	}
+	
+	defaultTarget {
+		^server;	
+	}
+	
+	defaultAddAction {
+		^\addToHead;	
 	}
 }

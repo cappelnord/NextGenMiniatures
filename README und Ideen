@@ -6,13 +6,13 @@ Folgende Softwarekomponenten müssen entwickelt werden:
 
 - Kompositions Framework (wie können Laptops angesprochen werden)
   --> z.B. EventTypes und ein Interface
-- Server, der entweder Nachrichten an die Clients oder an die
+- Server (Director), der entweder Nachrichten an die Clients oder an die
   Testumgebung weiterreicht.
 - Die Testumgebung sollte dem Komponisten ermöglichen ein Stück
   mit allen Aspekten möglichst realitätsnah zu simulieren.
 - Der Client muss im Moment v.a. die Farben darstellen können.
   Eventuell muss noch weiterer, fancy stuff, geschehen?
-- Ein Sequencer, der die einzelnen Miniaturen ausspielt.
+- Ein Sequencer, der die einzelnen Miniaturen ausspielt. (ToDo)
 
 Dabei ist jede Miniatur erstmal eine SC Funktion, die jedoch
 auf alle weiteren Techniken zurückgreifen kann (z.B. eine
@@ -56,7 +56,7 @@ müssen natürlich von Client und Text Umgebung dementsprechend
 interpretiert werden können.
 
 - Spiele Synth xyz mit Parametern abc
-  --> Im Moment durch play + Synth Objekt
+  --> Im Moment durch play
 - Setze Farbe auf RGB (color)
 - Fade auf Farbe RGB in t Sekunden (fadeColor)
 - Führe auf Client Quelltext blub aus (execute)
