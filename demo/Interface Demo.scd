@@ -69,9 +69,12 @@ g.at(4).fadeColor(0,1,1,10)
 
 // Die Funktionen müssen natürlich in sich geschlossen sein, sonst klappt das umwandeln
 // in einen String nicht.
+
+// Wenn der execute Methode weitere Argumente übergeben werden, werden sie mit der Funktion mitgeschickt
+// und hinter dem Client Objekt der Funktion übergeben
 (
-g.clients.do {|c|
-	c.execute({|c| fork { 5.do { c.color(1.0.rand, 1.0.rand, 1.0.rand); 1.0.rand.wait };};});
+g.clients.do {|c, i|
+	c.execute({|c, i| fork { (i*2).do { c.color(1.0.rand, 1.0.rand, 1.0.rand); 1.0.rand.wait };};}, i);
 };
 )
 

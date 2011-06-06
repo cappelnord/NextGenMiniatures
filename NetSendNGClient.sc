@@ -24,8 +24,9 @@ NetSendNGClient : OutputNGClient {
 		// Spielt den Synth auf den Server aus 	
 	} */
 	
-	execute {|func|
-		net.sendMsg("/execute", func.cs);	
+	execute {|... args|
+		args[0] = args[0].cs;
+		net.sendMsg("/execute", *args);	
 	}
 	
 	color {|red, green, blue|

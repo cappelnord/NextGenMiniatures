@@ -14,8 +14,10 @@ OutputNGClient : AbstractNGClient {
 	
 	// Konstruktor der abgeleiteten Klassen müssen view und server erzeugen
 	
-	execute {|func|
-		func.value(this);	
+	execute {|... args|
+		var func = args[0];
+		args[0] = this;
+		func.value(*args);	
 	}
 	
 	play {|defName, args, target, addAction|

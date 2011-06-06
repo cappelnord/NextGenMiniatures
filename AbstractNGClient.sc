@@ -19,7 +19,7 @@ AbstractNGClient {
 		"play not implemented".warn;	
 	}
 	
-	execute {|func|
+	execute {|... args|
 		"execute not implemented".warn;	
 	}
 	

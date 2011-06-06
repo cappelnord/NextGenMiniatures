@@ -59,4 +59,4 @@ interpretiert werden können.
   --> Im Moment durch play
 - Setze Farbe auf RGB (color)
 - Fade auf Farbe RGB in t Sekunden (fadeColor)
-- Führe auf Client Quelltext blub aus (execute)
+- Führe auf Client Quelltext blub mit Argumetnen klack aus (execute)

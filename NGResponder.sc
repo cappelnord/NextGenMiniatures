@@ -18,7 +18,9 @@ NGResponder {
 		responders = List.new;
 		
 		responders.add(OSCresponder(nil, "/execute", {|time, resp, msg|
-			client.execute(msg[1].interpret);
+			msg = msg[1..];
+			msg[0] = msg[0].interpret;
+			client.execute(*msg);
 		}).add);
 		
 		responders.add(OSCresponder(nil, "/color", {|time, resp, msg|

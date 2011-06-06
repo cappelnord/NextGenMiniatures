@@ -18,8 +18,9 @@ TestNGClient : OutputNGClient {
 	}
 	
 	// wir wandeln in src um und zurück
-	execute {|func|
-		super.execute(func.cs.interpret);
+	execute {|... args|
+		args[0] = args[0].cs.interpret;
+		super.execute(*args);
 	}
 	
 	init {|id, position|
