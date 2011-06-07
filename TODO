@@ -4,3 +4,4 @@
 - Patterns für Sounds, sinvolle Event Struktur
 - Nutzung der play Methode für visuelles testen (wo wird abgespielt)
 - SkipJacking der Testnodes
+- IDs und Array Index hängen nicht zwingend miteinander zusammen. Absichern.
