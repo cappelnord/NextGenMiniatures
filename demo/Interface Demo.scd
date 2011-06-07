@@ -17,7 +17,7 @@ TestNGClient.numSimulationSpeakers = 2; // für PanAz (to implement)
 	1.wait; // wir hatten mit Grainface mal Probleme, wenn wir mehrere Server gleichzeitig starten
 };
 }.fork(AppClock);
-)
+) // Danach warten bis der letze (ng_8) ready ist
 
 // jeder TestClient hat seinen eigenen Server. Damit können MultiCores
 // besser genutzt werden und es ist näher am "Original" dran.
@@ -35,7 +35,7 @@ g.clients.do {|c| c.server.makeWindow } // passen halt net alle drauf
 // MacBooks haben Stereo Lautsprecher, also SynthDefs auch Stereo machen
 // Panning macht natürlich nur begrenzt Sinn (aber ist schon wahrnehmbar)
 (
-SynthDef(\plong, {|freq=440, amp=0.2, release=0.4|
+SynthDef(\pling, {|freq=440, amp=0.2, release=0.4|
 	var sig = SinOsc.ar(freq);
 	sig = sig * EnvGen.kr(Env.perc(0.001, release), doneAction: 2);
 	Out.ar(0, sig.dup * amp);
