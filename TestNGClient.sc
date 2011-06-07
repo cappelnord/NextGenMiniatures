@@ -50,9 +50,11 @@ TestNGClient : OutputNGClient {
 		
 		this.color(0,0,0);
 		
-		{
+		fork {
+		server.waitForBoot {
+			("Server " ++ this.serverName ++ " should be booted!").postln;
 			this.buildNodes;
-		}.defer(3);
+		}};
 	}
 	
 	play {|defName, args, target, addAction|
@@ -96,6 +98,8 @@ TestNGClient : OutputNGClient {
 			}).send(server);
 		});
 		
+		
+		
 		// TODO: implement
 		SynthDef(\ng_simspeaker, {
 			ReplaceOut.ar(0, In.ar(0,2));
@@ -118,7 +122,9 @@ TestNGClient : OutputNGClient {
 			simPositionNode = Synth(\ng_simpos, target: frontNode, addAction: \addBefore);
 			frontNode = simPositionNode;
 		};
-		}.defer(0.5);
+		
+		("Server " ++ this.serverName ++ " should be ready!").postln;
+		}.defer(2);
 
 	}
 }

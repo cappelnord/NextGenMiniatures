@@ -10,10 +10,13 @@ TestNGClient.numSimulationSpeakers = 2; // für PanAz (to implement)
 // theoretisch einfach mit NetSendClients austauschen können.
 
 (
+{
 9.do {|i|
 	var point = Point(i%3 * 0.5, (i/3).floor * 0.5);
 	NGDirector.addTestClient(i, point);	
-}
+	1.wait; // wir hatten mit Grainface mal Probleme, wenn wir mehrere Server gleichzeitig starten
+};
+}.fork(AppClock);
 )
 
 // jeder TestClient hat seinen eigenen Server. Damit können MultiCores

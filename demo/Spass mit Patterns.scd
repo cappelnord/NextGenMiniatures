@@ -8,10 +8,13 @@
 // Null setzen (Sorry, sollte ich noch verbessern)
 
 (
+{
 9.do {|i|
 	var point = Point(i%3 * 0.5, (i/3).floor * 0.5);
 	NGDirector.addTestClient(i, point);	
-}
+	1.wait; // wir hatten mit Grainface mal Probleme, wenn wir mehrere Server gleichzeitig starten
+};
+}.fork(AppClock);
 )
 
 NGDirector.instance.testWindow.front;
