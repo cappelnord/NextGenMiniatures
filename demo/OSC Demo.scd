@@ -12,7 +12,6 @@ g = NGDirector.instance;
 NGClient(false); // dies fügt den lokalen Client hinzu. true würde fullscreen erzeugen
 
 
-// SynthDefs an alle Server können wir mit sendNG schicken
 // MacBooks haben Stereo Lautsprecher, also SynthDefs auch Stereo machen
 // Panning macht natürlich nur begrenzt Sinn (aber ist schon wahrnehmbar)
 (
@@ -20,13 +19,13 @@ SynthDef(\pling, {|freq=440, amp=0.2, release=0.4|
 	var sig = SinOsc.ar(freq);
 	sig = sig * EnvGen.kr(Env.perc(0.001, release), doneAction: 2);
 	Out.ar(0, sig.dup * amp);
-}).sendNG();
+}).add();
 
 SynthDef(\krch, {|amp = 0.2|
 	var sig = Dust2.ar(400);
 	sig = sig * EnvGen.kr(Env.perc(0.001, 0.2), doneAction: 2);
 	Out.ar(0, sig.dup * amp);
-}).sendNG();
+}).add();
 )
 
 // Wie abgesprochen können Synths natürlich MouseX und MouseY nutzen

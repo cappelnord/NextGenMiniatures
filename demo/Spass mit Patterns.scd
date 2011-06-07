@@ -18,13 +18,51 @@ NGDirector.instance.testWindow.front;
 
 (
 Event.addEventType(\ng_color, {
-	NGDirector.instance.at(~where).color(~red ? 0, ~green ? 0, ~blue ? 0);
+	NGDirector.instance.at(~where ? 0).color(~red ? 0, ~green ? 0, ~blue ? 0);
 });
 
 Event.addEventType(\ng_blink, {
-	NGDirector.instance.at(~where).blink(~red ? 0, ~green ? 0, ~blue ? 0, ~time ? 0.1);
+	NGDirector.instance.at(~where ? 0).blink(~red ? 0, ~green ? 0, ~blue ? 0, ~time ? 0.1);
 });
+
+// dies umgeht die play Methode von NGClients, also wird's nicht im Testfenster angezeigt.
+// auch sollte dies wohl eleganter gehen.
+// auch sollte man das noch aufräumen, etc. blub. uneffizient
+// man sollte mal die Republic Klasse schauen, wie das da funktioniert
+Event.addEventType(\ng_sound, {
+	var g = NGDirector.instance;
+	(~x.notNil && ~y.notNil).if {
+		~where = g.clients.indexOf(g.nearestClient(Point(~x, ~y)));
+	};
+	~where = ~where ? 0;
+	~type = \grain;
+	~server = g.at(~where).server;
+	~play.value();
+});
+
 )
+
+(
+SynthDef(\pling, {|freq=440, amp=0.2, release=0.4|
+	var sig = SinOsc.ar(freq);
+	sig = sig * EnvGen.kr(Env.perc(0.001, release), doneAction: 2);
+	Out.ar(0, sig.dup * amp);
+}).add; // wir müssen es auch adden, damit es in SynthDescLib geschrieben wird.
+
+// man sieht an dem Panning, dass die Testknoten aktiv sind
+
+Pdef(\ng_soundtest, Pbind(
+	\type, \ng_sound,
+	\instrument, \pling,
+	\degree, 2,
+	\where, Pseq((0..8),inf),
+	// \x, Pwhite(0.0, 1.0, inf),
+	// \y, Pwhite(0.0, 1.0, inf),
+	\dur, 0.25
+)).play;
+)
+
+Pdef(\ng_soundtest).clear
 
 // klappt natürlich auch ohne Pdef
 
