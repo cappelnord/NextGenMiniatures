@@ -59,12 +59,15 @@ TestNGClient : OutputNGClient {
 	
 	play {|defName, args, target, addAction|
 		super.play(defName, args, target, addAction);
-		
+		this.visualPlayCue();
+	}
+	
+	visualPlayCue {
 		{
 			view.stringColor = Color(1,0,0,1);
 			0.1.wait;
 			view.stringColor = Color(1,1,1,1);
-		}.fork(AppClock);
+		}.fork(AppClock);	
 	}	
 	
 	*getServerPort {

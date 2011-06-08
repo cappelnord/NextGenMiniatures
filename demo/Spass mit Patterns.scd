@@ -31,7 +31,8 @@ Event.addEventType(\ng_blink, {
 	NGDirector.instance.at(~where ? 0).blink(~red ? 0, ~green ? 0, ~blue ? 0, ~time ? 0.1);
 });
 
-// dies umgeht die play Methode von NGClients, also wird's nicht im Testfenster angezeigt.
+// dies umgeht die play Methode von NGClients, also wird's nicht automatisch im Testfenster angezeigt.
+// visualPlayCue schafft abhilfe.
 // auch sollte dies wohl eleganter gehen.
 // auch sollte man das noch aufräumen, etc. blub. uneffizient
 // man sollte mal die Republic Klasse schauen, wie das da funktioniert
@@ -43,6 +44,7 @@ Event.addEventType(\ng_sound, {
 	~where = ~where ? 0;
 	~type = \grain;
 	~server = g.at(~where).server;
+	g.at(~where).visualPlayCue;
 	~play.value();
 });
 

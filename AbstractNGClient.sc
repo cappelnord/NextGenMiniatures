@@ -38,4 +38,8 @@ AbstractNGClient {
 	serverName {
 		^("ng_" ++ id.asString).asSymbol;	
 	}
+	
+	visualPlayCue {
+		// NOOP	
+	}
 }
