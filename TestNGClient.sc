@@ -19,7 +19,7 @@ TestNGClient : OutputNGClient {
 	
 	// wir wandeln in src um und zurück
 	execute {|... args|
-		args[0] = args[0].cs.interpret;
+		args[0] = args[0].asCompileString.interpret;
 		super.execute(*args);
 	}
 	

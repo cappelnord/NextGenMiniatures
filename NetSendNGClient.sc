@@ -25,7 +25,7 @@ NetSendNGClient : OutputNGClient {
 	} */
 	
 	execute {|... args|
-		args[0] = args[0].cs;
+		args[0] = args[0].asCompileString;
 		net.sendMsg("/execute", *args);	
 	}
 	
