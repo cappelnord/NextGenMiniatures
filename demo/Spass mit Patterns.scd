@@ -7,10 +7,13 @@
 // Sollte noch ein NGDirector leben am besten mit Rekompilierung alles auf
 // Null setzen (Sorry, sollte ich noch verbessern)
 
-(
+// Ein GROSSES Problem: die Simulations Nodes werden nach Command Period wieder gelöscht.
+// Sollten geskippjacked werden.
+
+( // dauert lange!!
 {
-9.do {|i|
-	var point = Point(i%3 * 0.5, (i/3).floor * 0.5);
+16.do {|i|
+	var point = Point(i%4 * (1/3), (i/4).floor * (1/3));
 	NGDirector.addTestClient(i, point);	
 	1.wait; // wir hatten mit Grainface mal Probleme, wenn wir mehrere Server gleichzeitig starten
 };
@@ -19,7 +22,7 @@
 
 NGDirector.instance.testWindow.front;
 
-(
+( // Dies sind Event Types. Wenn diese Klammer asugeführt wird gibt es neue Event/Pattern Typen
 Event.addEventType(\ng_color, {
 	NGDirector.instance.at(~where ? 0).color(~red ? 0, ~green ? 0, ~blue ? 0);
 });
@@ -58,10 +61,11 @@ Pdef(\ng_soundtest, Pbind(
 	\type, \ng_sound,
 	\instrument, \pling,
 	\degree, 2,
-	\where, Pseq((0..8),inf),
+	\where, Pseq((0..15),inf),
 	// \x, Pwhite(0.0, 1.0, inf),
 	// \y, Pwhite(0.0, 1.0, inf),
-	\dur, 0.25
+	\dur, 0.25,
+	\amp, 0.1
 )).play;
 )
 
@@ -76,7 +80,7 @@ Pdef(\ng_test, Pbind(
 	\red, Pwhite(0.0, 1.0),
 	\green, Pseq([0,1],inf),
 	\blue, 0.5,
-	\where, Prand((0..8),inf)
+	\where, Prand((0..15),inf)
 )).play;
 )
 
@@ -86,7 +90,7 @@ Pdef(\ng_test2, Pbind(
 	\type, \ng_blink,
 	[\red, \green, \blue], 1!3,
 	\time, 0.1,
-	\where, Pseq((0..8),inf) 
+	\where, Pseq((0..15),inf) 
 )).play;
 )
 

@@ -5,19 +5,22 @@ TestNGClient.simulateSpeaker = true; // Speaker Simulation (not yet implemented)
 TestNGClient.ampulitudeMul = 0.5; // Damit nicht gleich alles übersteuert
 TestNGClient.numSimulationSpeakers = 2; // für PanAz (to implement)
 
-// Wir bauen hier erstmal unseren Director mit einer 3x3 Matrix
+// Wir bauen hier erstmal unseren Director mit einer 4x4 Matrix
 // Wir nutzen nur TestClients. In der Performance sollte man dies
 // theoretisch einfach mit NetSendClients austauschen können.
 
-(
+// Ein GROSSES Problem: die Simulations Nodes werden nach Command Period wieder gelöscht.
+// Sollten geskippjacked werden.
+
+( // dauert lange!!
 {
-9.do {|i|
-	var point = Point(i%3 * 0.5, (i/3).floor * 0.5);
+16.do {|i|
+	var point = Point(i%4 * (1/3), (i/4).floor * (1/3));
 	NGDirector.addTestClient(i, point);	
 	1.wait; // wir hatten mit Grainface mal Probleme, wenn wir mehrere Server gleichzeitig starten
 };
 }.fork(AppClock);
-) // Danach warten bis der letze (ng_8) ready ist
+) // Danach warten bis der letze (ng_15) ready ist
 
 // jeder TestClient hat seinen eigenen Server. Damit können MultiCores
 // besser genutzt werden und es ist näher am "Original" dran.
