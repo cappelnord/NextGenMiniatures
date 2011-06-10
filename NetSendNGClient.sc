@@ -15,6 +15,7 @@ NetSendNGClient : OutputNGClient {
 		net = NetAddr(host, 57120);
 		
 		server = Server(this.serverName, NetAddr(host, 57110));
+		server.latency = nil;
 		server.serverRunning_(true);
 			
 	}
