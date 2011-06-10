@@ -1,17 +1,27 @@
 NGDirector {
 	classvar instance_obj;
-	classvar <testWindowWidth = 600;
-	classvar <testWindowHeight = 600;
+	classvar <>testWindowWidth = 600;
+	classvar <>testWindowHeight = 600;
+	
+	classvar <>compositionBaseDir = "~/";
+	
+	classvar <>preConcertDelay = 5;
+	classvar <>concertPause = 5;
 	
 	var testWindow;
+	
+	var concertIterator;
+	
 	var <clients;
+	var <compositions;
 	
 	*new {
 		^super.new.init();
 	}
 	
 	init {
-		clients = List.new;	
+		clients = List.new;
+		compositions = List.new;
 	}
 	
 	*instance {
@@ -64,5 +74,77 @@ NGDirector {
 			};
 		}
 		^client;
+	}
+	
+	clearCompositions {
+		compositions = List.new;	
+	}
+	
+	addComposition {|file|
+		var func = this.compositionFile(file).load;
+		func.notNil.if {
+			compositions = compositions.add(func);
+		};
+	}
+	
+	playComposition {|file|
+		var func = this.compositionFile(file).load;
+		{
+			func.value(this);
+		}.fork;
+	}
+	
+	compositionFile {|file|
+		^(compositionBaseDir ++ file);
+	}
+	
+	startConcert {
+		concertIterator = compositions.iter;
+		{
+			"Concert started. Waiting for first piece".postln;
+			preConcertDelay.wait;
+			this.nextComposition(false);
+		}.fork;
+	}
+	
+	stopConcert {
+		"Concert Stopped".postln;
+		concertIterator = nil;	
+	}
+	
+	finishComposition {
+		concertIterator.notNil.if {
+			this.nextComposition;	
+		};
+	}
+	
+	nextComposition {|wait=true|
+		var next = concertIterator.next;
+		
+		this.safeBlack;
+		
+		next.isNil.if ({
+			this.stopConcert;
+		}, {
+			{
+				wait.if {
+					"Waiting for next piece ...".postln;
+					concertPause.wait;
+				};
+				"Piece started!".postln;
+				next.value(this);
+			}.fork;
+		});	
+	}
+	
+	safeBlack {
+		fork {
+			3.do {
+				clients.do {|client|
+					client.color(0,0,0);	
+				}
+			};
+			0.5.wait;	
+		};	
 	}
 }
