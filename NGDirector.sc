@@ -99,6 +99,8 @@ NGDirector {
 	}
 	
 	startConcert {
+		this.safeBlack;
+		
 		concertIterator = compositions.iter;
 		{
 			"Concert started. Waiting for first piece".postln;
@@ -109,10 +111,13 @@ NGDirector {
 	
 	stopConcert {
 		"Concert Stopped".postln;
+		this.safeBlack;
 		concertIterator = nil;	
 	}
 	
 	finishComposition {
+		this.safeBlack;
+		
 		concertIterator.notNil.if {
 			this.nextComposition;	
 		};
@@ -120,9 +125,7 @@ NGDirector {
 	
 	nextComposition {|wait=true|
 		var next = concertIterator.next;
-		
-		this.safeBlack;
-		
+			
 		next.isNil.if ({
 			this.stopConcert;
 		}, {
