@@ -63,7 +63,13 @@ OutputNGClient : AbstractNGClient {
 		
 		{
 			view.background = Color(red, green, blue, 1.0);
-			{view.background = oldColor; oldColor = nil;}.defer(time);
+			{
+				oldColor.notNil.if {
+					view.background = oldColor;
+					oldColor = nil;
+				};
+			}.defer(time);
+			
 		}.defer;
 	}
 	
