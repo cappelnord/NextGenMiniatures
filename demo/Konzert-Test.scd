@@ -23,7 +23,7 @@ NGDirector.compositionBaseDir = "/Users/patrick/Desktop/ng/"; // Pfad in denen d
 NGDirector.instance.testWindow.front;
 
 // Wenn ihr nur einen Kompositionsfile abspielen wollt dann macht das hiermit:
-NGDirector.instance.playComposition("test.scd");
+NGDirector.instance.playComposition("ja.scd");
 
 ( // Hier laden wir die Kompositionen.
   // Zu diesem Zeitpunkt sollten alle Clients bereits gestartet haben
